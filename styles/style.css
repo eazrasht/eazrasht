@@ -1,0 +1,659 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+:root {
+  --primary-color: #0369a1;
+  --secondary-color: #0f766e;
+  --main-white: #f8fafc;
+  --main-black: #121314;
+}
+
+body {
+  max-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: "Advent Pro", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 400;
+  background-color: var(--main-white);
+  color: var(--main-black);
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 380px;
+  background: linear-gradient(-45deg, #fed7aa, #fca5a5, #fed7aa, #f43f5e, #fed7aa);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+.nav-logo img {
+  width: calc(130px + 0.2vw);
+  cursor: pointer;
+  transition: all ease-in-out 100ms;
+}
+
+.nav-logo img:hover,
+.nav-logo img:focus {
+  scale: 1.01;
+}
+
+h1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-input {
+  width: 240px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.nav-input input {
+  border: none;
+  outline: none;
+  padding: 3px 5px;
+  border-radius: 8px;
+  transition: all ease-in 200ms;
+  font-family: "iranYekan";
+  font-size: 1.6rem;
+}
+
+.nav-input input:focus {
+  box-shadow: 2px 2px 2px rgb(0, 0, 0, 10%);
+}
+
+.nav-input svg {
+  width: 25px;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 640px) {
+  nav {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-around;
+    height: 20vh;
+  }
+}
+
+header article {
+  background-color: #09090b;
+  padding: 30px 40px;
+  max-width: 100vw;
+  position: relative;
+}
+
+.nav__list {
+  display: none;
+}
+.toggler {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+header article ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  gap: 15px;
+  font-family: "iranYekan";
+  transition: all ease-in-out 300ms;
+}
+
+article ul a {
+  color: #fafafa !important;
+}
+
+.nav__underline {
+  border-bottom: solid #e0f2fe 2px;
+  margin-bottom: 2px;
+}
+
+header article svg {
+  color: #fafafa;
+  width: 40px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+@media screen and (min-width: 640px) {
+  header article svg {
+    display: none;
+  }
+  .nav__list {
+    display: block;
+  }
+  .nav__underline {
+    border-bottom: none;
+  }
+  header article {
+    height: 10vh;
+    display: flex;
+    direction: rtl;
+  }
+  header article .nav__list {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    font-size: calc(1.3rem + 0.19vw);
+  }
+}
+
+/* === */
+
+.slide-container .prev,
+.slide-container .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  transition: all 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.slide-container .prev:hover,
+.slide-container .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+
+.slide-container .prev {
+  left: 2px;
+}
+
+.slide-container .next {
+  right: 2px;
+}
+
+.dots-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.dots-container .dot {
+  cursor: pointer;
+  margin: 5px;
+  width: 20px;
+  height: 20px;
+  color: #333;
+  border-radius: 50%;
+  background-color: #dfd6ce;
+}
+
+.dots-container .dot.active {
+  border: 2px solid green;
+}
+
+.slide-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* max-width: 1000px; */
+  max-width: 100vw;
+  height: 30%;
+  margin: auto;
+  position: relative;
+}
+
+.slide-container .slide {
+  display: none;
+  width: 100%;
+}
+
+.slide-container .slide.fade {
+  animation: fade 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+.slide-container .slide img {
+  width: 100%;
+}
+
+.slide-one {
+  width: 100vw;
+  height: 50vh;
+  background: url("../assets/images/one.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.slide-two {
+  width: 100vw;
+  height: 50vh;
+  background: url("../assets/images/two.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* .slide-three {
+  width: 100vw;
+  height: 50vh;
+  background: url("../assets/images/three.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+} */
+
+@media screen and (min-width: 640px) {
+  .slide-one {
+    height: 85vh;
+  }
+
+  .slide-two {
+    height: 85vh;
+  }
+
+  /* .slide-three {
+    height: 85vh;
+  } */
+}
+
+/* === */
+
+.news {
+  width: 100vw;
+  overflow: hidden;
+}
+
+.news h2 {
+  background-color: #09090b;
+  display: grid;
+  place-content: center;
+  height: 60px;
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+.right {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all ease-in-out 200ms;
+}
+
+.right-img {
+  height: 300px;
+  background: url("../assets/images/news.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.news .right-text {
+  padding: 20px 30px;
+  font-family: "iranYekan";
+}
+
+.right-text .label {
+  color: #292524;
+  padding: 5px;
+  border-radius: 6px;
+  font-weight: 800;
+
+  background: linear-gradient(-45deg, #f87171, #fb923c, #facc15);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+.right-text h3 {
+  margin-top: 15px;
+  font-weight: 800;
+}
+
+.right-text p {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 30px;
+}
+
+.left article {
+  display: flex;
+  gap: 20px;
+  font-family: "iranYekan";
+  font-size: 1.7rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all ease-in-out 200ms;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+}
+.left article:hover,
+.left article:focus {
+  scale: 1.03;
+}
+
+.left img {
+  width: 120px;
+  height: 120px;
+  border-radius: 20px;
+  transition: all ease-in-out 200ms;
+}
+
+@media screen and (min-width: 640px) {
+  .news section {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 30px 40px;
+  }
+  .news .right:hover {
+    scale: 1.01;
+  }
+  .right {
+    width: 45%;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin-top: 20px;
+  }
+  .right-img {
+    border-radius: 20px;
+  }
+  .left {
+    width: 55%;
+  }
+}
+
+/* === */
+
+.quick-access h2 {
+  background-color: #09090b;
+  display: grid;
+  place-content: center;
+  height: 60px;
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+.quick-access section {
+  width: 100vw;
+  height: auto;
+  padding: 20px 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+  gap: 20px;
+  justify-content: center;
+  background: linear-gradient(-45deg, #fed7aa, #ef4444, #fdba74, #e11d48);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+.quick-access article {
+  width: 300px;
+  height: 380px;
+  direction: rtl;
+  padding: 10px 15px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 0.5px 1px rgba(94, 94, 94, 0.1);
+  transition: transform 250ms ease-in;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  font-family: "iranYekan";
+  font-size: 1.6rem;
+}
+.quick-access article:hover {
+  transform: scale(1.02);
+}
+
+.quick-access article img {
+  width: 100%;
+}
+
+.quick-access article h3 {
+  font-weight: 800;
+}
+.quick-access article p {
+  font-weight: bold;
+}
+
+.quick-access button {
+  --glow-color: rgb(255, 230, 231);
+  --glow-spread-color: rgba(255, 255, 255, 0.781);
+  --enhanced-glow-color: rgb(231, 206, 255);
+  --btn-color: rgb(216, 37, 37, 0.9);
+  border: 0.25em solid var(--glow-color);
+  padding: 0.6em 1.5em;
+  color: var(--glow-color);
+  font-size: 15px;
+  font-weight: bold;
+  background-color: var(--btn-color);
+  border-radius: 1em;
+  outline: none;
+  position: relative;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.quick-access button:hover {
+  color: var(--btn-color);
+  background-color: var(--glow-color);
+  box-shadow: 0 0 1em 0.25em var(--glow-color),
+    0 0 4em 2em var(--glow-spread-color),
+    inset 0 0 0.75em 0.25em var(--glow-color);
+}
+
+.quick-access button:active {
+  box-shadow: 0 0 0.6em 0.25em var(--glow-color),
+    0 0 2.5em 2em var(--glow-spread-color),
+    inset 0 0 0.5em 0.25em var(--glow-color);
+}
+
+@media screen and (min-width: 640px) {
+  .quick-access section {
+    padding: 30px 40px;
+    gap: 50px;
+    direction: rtl;
+  }
+}
+
+/* === */
+
+.announcements h2 {
+  background-color: #09090b;
+  display: grid;
+  place-content: center;
+  height: 60px;
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: #fff;
+}
+
+.announcements section {
+  width: 100vw;
+  height: auto;
+  padding: 20px 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+  gap: 20px;
+  justify-content: center;
+  direction: rtl;
+}
+
+.announcements article {
+  width: 320px;
+  height: 350px;
+  direction: rtl;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 0.5px 1px rgba(94, 94, 94, 0.1);
+  transition: transform 250ms ease-in;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  font-family: "iranYekan";
+  font-size: 1.6rem;
+  transition: all ease-in-out 250ms;
+}
+.announcements article:hover,
+.announcements article:focus {
+  transform: scale(1.03);
+  transform: rotate(1deg);
+}
+.anno-one {
+  background: url('../assets/images/eid.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.anno-two {
+  background: url('../assets/images/yekta1.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.anno-three {
+  background: url('../assets/images/yekta2.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.announcements article span {
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(-45deg, #f87171, #fb923c, #facc15);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+.announcements article a {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #09090b;
+  transition: all ease-in-out 250ms;
+}
+.announcements article a:hover {
+  color: red;
+}
+
+@media screen and (min-width: 640px) {
+  .announcements section {
+    padding: 20px 30px;
+    gap: 60px;
+  }
+}
+
+/* === */
+
+footer {
+  background: linear-gradient(-45deg, #b91c1c, #991b1b, #7f1d1d);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  color: #e0f2fe;
+  padding: 30px 30px;
+  font-family: 'iranYekan';
+  clip-path: polygon(50% 3%, 100% 0, 100% 100%, 0 100%, 0 0);
+}
+
+footer hr {
+  color: #fff;
+}
+
+.footer-div-one {
+  width: 300px;
+  height: 280px;
+}
+.footer-div-one div {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.footer-div-one h5 {
+  width: 45%;
+  padding-bottom: 10px;
+  border-bottom: solid #fff 2px; 
+}
+
+.footer-div-two {
+  width: 300px;
+  height: 250px;
+}
+.footer-div-two div {
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.end {
+  font-family: 'iranYekan';
+  font-size: 1.4rem;
+  text-align: center;
+  color: #7f1d1d;
+}
+
+@media screen and (min-width: 640px) {
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+  }
+  .footer-div-one {
+    width: 400px;
+  }
+  .footer-div-two {
+    width: 400px;
+  }
+}
